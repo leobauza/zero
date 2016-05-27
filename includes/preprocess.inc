@@ -32,10 +32,12 @@ function zero_preprocess_page(&$vars) {
     if (!$vars['is_front']) {
       $vars['theme_hook_suggestions'][] = 'page__' . $node_type;
     }
+    // Zero entity that wraps around the entity_metadata_wrapper.
     $entity = $vars["entity"] = new Zero\Entity($node, $node_type);
+    // Fields array for easier isset checking. (maybe good?).
     $fields = $vars["fields"] = $entity->getFieldsArray();
+    // The entity_metadata_wrapper we wrapped around. (inception).
     $wrapper = $vars["wrapper"] = $entity->getWrapper();
-
   }
 }
 
