@@ -2,9 +2,12 @@
 /**
  * @file
  * Preprocessors.
+ *
+ * The zero theme requires the Nil namespace provided by the nil module.
+ *
+ * @see
+ *   /modules/custom/nil
  */
-
-require_once drupal_get_path('theme', 'zero') . "/zero.inc";
 
 /**
  * Implements hook_preprocess_html().
@@ -15,7 +18,7 @@ function zero_preprocess_html(&$vars) {
     "main-menu",
   );
   // Retrieve Menus.
-  $main_menu = Zero\Theme::getMenus($menus);
+  $main_menu = Nil\Theme::getMenus($menus);
 
   $vars["main_menu"] = $main_menu;
 
@@ -33,7 +36,7 @@ function zero_preprocess_page(&$vars) {
       $vars['theme_hook_suggestions'][] = 'page__' . $node_type;
     }
     // Zero entity that wraps around the entity_metadata_wrapper.
-    $entity = $vars["entity"] = new Zero\Entity($node, $node_type);
+    $entity = $vars["entity"] = new Nil\Entity($node, $node_type);
     // Fields array for easier isset checking. (maybe good?).
     $fields = $vars["fields"] = $entity->getFieldsArray();
     // The entity_metadata_wrapper we wrapped around. (inception).
